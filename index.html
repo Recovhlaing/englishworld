@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#43a047">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>English World - Online English Classes</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage: { 50: '#e8f5e9', 100: '#c8e6c9', 200: '#a5d6a7', 300: '#66bb6a', 400: '#43a047', 500: '#2e7d32', DEFAULT: '#43a047' },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; }
+    button, a, input { -webkit-user-select: none; user-select: none; }
+    button, a { -webkit-touch-callout: none; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #8ebb8e; transition: width 0.3s; }
+    @media (hover: none) {
+      .nav-link:active::after { width: 100%; }
+    }
+    @media (hover: hover) {
+      .nav-link:hover::after { width: 100%; }
+    }
+    .fade-up { opacity: 0; transform: translateY(30px); animation: fadeUp 0.7s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .course-card { transition: transform 0.3s, box-shadow 0.3s; }
+    @media (hover: hover) {
+      .course-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    }
+    @media (hover: none) {
+      .course-card:active { transform: scale(0.98); }
+    }
+    .review-card { transition: transform 0.3s; }
+    @media (hover: hover) {
+      .review-card:hover { transform: scale(1.02); }
+    }
+    .scroll-smooth { scroll-behavior: smooth; }
+    .hero-pattern {
+      background: linear-gradient(-45deg, #ffffff, #f0f5f0, #ffffff, #dce8dc);
+      background-size: 400% 400%;
+      animation: gradientFlow 15s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .mobile-menu.open { max-height: 500px; }
+    .slide-up { animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .section-reveal {
+      opacity: 0;
+      animation: slideUp 0.8s ease forwards;
+    }
+    section { transition: transform 0.3s ease; }
+    /* Glow effects */
+    .glow-sage {
+      position: relative;
+    }
+    .glow-sage::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(102, 187, 106, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    .float-slow {
+      animation: float 6s ease-in-out infinite;
+    }
+    /* Shimmer effect */
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+    .shimmer-load {
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+      background-size: 1000px 100%;
+      animation: shimmer 2s infinite;
+    }
+    /* Enhanced hover depth */
+    .depth-lift {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    }
+    .depth-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+    /* Icon bounce on hover */
+    @keyframes iconBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .icon-bounce:hover i {
+      animation: iconBounce 0.6s ease-in-out;
+    }
+    /* Gradient text effect */
+    .gradient-text {
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Pulse for CTAs */
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    .pulse-accent {
+      animation: pulse-soft 3s ease-in-out infinite;
+    }
+    /* Smooth underline on nav */
+    .nav-link {
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #43a047, transparent);
+      transition: left 0.5s ease;
+    }
+    @media (hover: hover) {
+      .nav-link:hover::before { left: 100%; }
+    }
+    /* Card border glow */
+    .card-glow {
+      position: relative;
+      border: 1px solid rgba(67, 160, 71, 0.1);
+      transition: all 0.3s ease;
+    }
+    .card-glow:hover {
+      border-color: rgba(67, 160, 71, 0.3);
+      box-shadow: 0 0 20px rgba(67, 160, 71, 0.15);
+    }
+    /* Smooth number counter effect */
+    @keyframes countUp {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .stat-number {
+      animation: countUp 0.8s ease forwards;
+    }
+    .stat-number.delay-1 { animation-delay: 0.2s; }
+    .stat-number.delay-2 { animation-delay: 0.4s; }
+    .stat-number.delay-3 { animation-delay: 0.6s; }
+    button, a[role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 12px 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      font-size: inherit;
+    }
+    @media (max-width: 768px) {
+      body { font-size: 16px; }
+      h1 { font-size: clamp(28px, 7vw, 40px); }
+      h2 { font-size: clamp(24px, 6vw, 32px); }
+      h3 { font-size: clamp(18px, 5vw, 22px); }
+      .pt-32 { padding-top: 2rem; }
+      .pb-20 { padding-bottom: 1.5rem; }
+      .py-20 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+      .px-6 { padding-left: 1rem; padding-right: 1rem; }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full scroll-smooth">
+  <div id="app-wrapper" class="w-full h-full overflow-auto bg-white text-gray-900"><!-- Navigation -->
+   <nav id="navbar" class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100 safe-top">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between"><a href="#home" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-lg bg-sage-300 flex items-center justify-center flex-shrink-0"><i data-lucide="book-open" class="w-5 h-5 text-white"></i>
+      </div><span id="nav-school-name" class="font-display font-bold text-base sm:text-lg tracking-tight line-clamp-1">English World</span> </a>
+     <div class="hidden md:flex items-center gap-8 text-sm font-medium"><a href="#home" class="nav-link text-gray-700 hover:text-gray-900">Home</a> <a href="#about" class="nav-link text-gray-700 hover:text-gray-900">About</a> <a href="#courses" class="nav-link text-gray-700 hover:text-gray-900">Courses</a> <a href="#reviews" class="nav-link text-gray-700 hover:text-gray-900">Reviews</a> <a href="#contact" class="nav-link text-gray-700 hover:text-gray-900">Contact</a> <a href="#contact" class="px-5 py-2 bg-gray-900 text-white rounded-full text-sm hover:bg-gray-800 transition">Enroll Now</a>
+     </div><button id="mobile-toggle" class="md:hidden p-2.5 active:bg-gray-100 rounded transition" aria-label="Menu"> <i data-lucide="menu" class="w-6 h-6"></i> </button>
+    </div>
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 px-4 safe-bottom">
+     <div class="py-3 flex flex-col gap-3 text-sm font-medium"><a href="#home" class="py-3 px-2 text-gray-700 active:bg-gray-100 rounded" onclick="closeMobile()">Home</a> <a href="#about" class="py-3 px-2 text-gray-700 active:bg-gray-100 rounded" onclick="closeMobile()">About</a> <a href="#courses" class="py-3 px-2 text-gray-700 active:bg-gray-100 rounded" onclick="closeMobile()">Courses</a> <a href="#reviews" class="py-3 px-2 text-gray-700 active:bg-gray-100 rounded" onclick="closeMobile()">Reviews</a> <a href="#contact" class="py-3 px-2 text-gray-700 active:bg-gray-100 rounded" onclick="closeMobile()">Contact</a> <a href="#contact" class="py-3 px-4 bg-gray-900 text-white rounded-full text-sm text-center font-medium mt-2" onclick="closeMobile()">Enroll Now</a>
+     </div>
+    </div>
+   </nav><!-- Hero -->
+   <section id="home" class="hero-pattern pt-20 pb-12 md:pt-40 md:pb-28 px-4 sm:px-6 mt-14 sm:mt-16">
+    <div class="max-w-6xl mx-auto text-center">
+     <div class="fade-up inline-block px-4 py-1.5 bg-sage-50 text-sage-500 rounded-full text-sm font-medium mb-6 border border-sage-100">
+      100% Online Learning
+     </div>
+     <h1 id="hero-tagline" class="fade-up stagger-1 font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 mb-6 max-w-4xl mx-auto">Learn English,<br><span class="text-sage-400">Your Way, Your Time</span></h1>
+     <p id="hero-subtitle" class="fade-up stagger-2 text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed">Quality online English classes for all ages and levels. Small groups, personalized instruction, and flexible scheduling.</p>
+     <div class="fade-up stagger-3 flex flex-col sm:flex-row gap-4 justify-center"><a href="#courses" class="px-8 py-3.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition text-sm">Explore Courses</a> <a href="#about" class="px-8 py-3.5 bg-white text-gray-900 rounded-full font-medium border border-gray-200 hover:border-gray-400 transition text-sm">Learn More</a>
+     </div><!-- Stats -->
+     <div class="fade-up stagger-4 mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto">
+      <div>
+       <div class="font-display text-2xl md:text-3xl font-bold text-gray-900">
+        500+
+       </div>
+       <div class="text-xs text-gray-400 mt-1">
+        Students
+       </div>
+      </div>
+      <div>
+       <div class="font-display text-2xl md:text-3xl font-bold text-gray-900">
+        3
+       </div>
+       <div class="text-xs text-gray-400 mt-1">
+        Programs
+       </div>
+      </div>
+      <div>
+       <div class="font-display text-2xl md:text-3xl font-bold text-gray-900">
+        98%
+       </div>
+       <div class="text-xs text-gray-400 mt-1">
+        Satisfaction
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- About -->
+   <section id="about" class="py-16 sm:py-20 md:py-28 px-4 sm:px-6 bg-gray-50 section-reveal" style="animation-delay: 0.2s;">
+    <div class="max-w-6xl mx-auto">
+     <div class="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
+      <div>
+       <div class="text-sage-400 text-xs sm:text-sm font-medium uppercase tracking-widest mb-3">
+        About Us
+       </div>
+       <h2 id="about-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">Local, Professional English Education Online</h2>
+       <p id="about-text" class="text-sm sm:text-base text-gray-500 leading-relaxed mb-6">English World is a community-focused language school offering online classes taught by experienced, certified instructors. We provide structured, engaging lessons designed for all proficiency levels—from absolute beginners to advanced learners. Every student receives individualized attention in a supportive learning environment.</p>
+       <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+         <div class="w-8 h-8 bg-sage-100 rounded-full flex items-center justify-center flex-shrink-0">
+          <i data-lucide="monitor" class="w-4 h-4 text-sage-500"></i>
+         </div><span class="text-xs sm:text-sm text-gray-600">Live interactive online classes</span>
+        </div>
+        <div class="flex items-center gap-3">
+         <div class="w-8 h-8 bg-sage-100 rounded-full flex items-center justify-center flex-shrink-0">
+          <i data-lucide="users" class="w-4 h-4 text-sage-500"></i>
+         </div><span class="text-xs sm:text-sm text-gray-600">Small group &amp; private sessions</span>
+        </div>
+        <div class="flex items-center gap-3">
+         <div class="w-8 h-8 bg-sage-100 rounded-full flex items-center justify-center flex-shrink-0">
+          <i data-lucide="award" class="w-4 h-4 text-sage-500"></i>
+         </div><span class="text-xs sm:text-sm text-gray-600">Certified, experienced teachers</span>
+        </div>
+       </div>
+      </div>
+      <div class="relative mt-8 md:mt-0">
+       <div class="bg-sage-100 rounded-3xl p-6 sm:p-10 aspect-square flex items-center justify-center">
+        <div class="text-center">
+         <div class="w-16 sm:w-20 h-16 sm:h-20 mx-auto mb-4 bg-sage-300 rounded-2xl flex items-center justify-center">
+          <i data-lucide="globe" class="w-8 sm:w-12 h-8 sm:h-12 text-white"></i>
+         </div>
+         <div class="font-display text-lg sm:text-xl font-bold text-gray-800">
+          Local &amp; Connected
+         </div>
+         <div class="text-xs sm:text-sm text-gray-500 mt-1">
+          Building community through language
+         </div>
+        </div>
+       </div>
+       <div class="absolute -bottom-3 sm:-bottom-4 -right-3 sm:-right-4 bg-gray-900 text-white rounded-2xl px-4 sm:px-5 py-2 sm:py-3 text-xs sm:text-sm font-medium shadow-xl flex items-center gap-2 whitespace-nowrap"><i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i> 100% Online
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Courses -->
+   <section id="courses" class="py-16 sm:py-20 md:py-28 px-4 sm:px-6 section-reveal bg-gray-900" style="animation-delay: 0.3s;">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-10 sm:mb-14">
+      <div class="text-sage-400 text-xs sm:text-sm font-medium uppercase tracking-widest mb-3">
+       Our Programs
+      </div>
+      <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white">Courses We Teach</h2>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"><!-- Phonics -->
+      <div class="course-card bg-white border border-gray-100 rounded-2xl overflow-hidden card-glow depth-lift">
+       <div class="bg-sage-50 p-6 sm:p-8 text-center icon-bounce">
+        <div class="w-12 sm:w-14 h-12 sm:h-14 mx-auto bg-sage-100 rounded-xl flex items-center justify-center">
+         <i data-lucide="mic" class="w-5 sm:w-7 h-5 sm:h-7 text-sage-500"></i>
+        </div>
+        <div class="text-xs text-sage-500 font-medium uppercase tracking-wider mt-3">
+         Sound Foundations
+        </div>
+       </div>
+       <div class="p-4 sm:p-6">
+        <h3 class="font-display text-lg sm:text-xl font-bold text-gray-900 mb-2">Phonics</h3>
+        <p class="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">Master English sounds and letter combinations. Perfect for young learners building reading and pronunciation skills from the ground up.</p>
+        <ul class="text-xs text-gray-400 space-y-2 mb-5">
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400 flex-shrink-0"></i>Letter sounds &amp; blending</li>
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400 flex-shrink-0"></i>Reading fundamentals</li>
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400 flex-shrink-0"></i>Interactive word play</li>
+        </ul><a href="#contact" class="block text-center py-2.5 border border-gray-200 rounded-full text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-900 hover:text-white hover:border-gray-900 active:bg-gray-800 transition">Enroll</a>
+       </div>
+      </div><!-- Grammar -->
+      <div class="course-card bg-white border border-gray-100 rounded-2xl overflow-hidden">
+       <div class="bg-sage-50 p-8 text-center icon-bounce">
+        <div class="w-14 h-14 mx-auto bg-sage-100 rounded-xl flex items-center justify-center">
+         <i data-lucide="type" class="w-7 h-7 text-sage-500"></i>
+        </div>
+        <div class="text-xs text-sage-500 font-medium uppercase tracking-wider mt-3">
+         Structure &amp; Rules
+        </div>
+       </div>
+       <div class="p-6">
+        <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Grammar</h3>
+        <p class="text-sm text-gray-500 leading-relaxed mb-4">Build a strong English foundation with comprehensive grammar instruction. Tenses, syntax, and sentence structure made clear and practical.</p>
+        <ul class="text-xs text-gray-400 space-y-2 mb-5">
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Tenses &amp; verb forms</li>
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Sentence structure</li>
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Practical exercises</li>
+        </ul><a href="#contact" class="block text-center py-2.5 border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition">Enroll</a>
+       </div>
+      </div><!-- 4 Skills -->
+      <div class="course-card bg-white border border-gray-100 rounded-2xl overflow-hidden">
+       <div class="bg-sage-50 p-8 text-center icon-bounce">
+        <div class="w-14 h-14 mx-auto bg-sage-100 rounded-xl flex items-center justify-center">
+         <i data-lucide="brain" class="w-7 h-7 text-sage-500"></i>
+        </div>
+        <div class="text-xs text-sage-500 font-medium uppercase tracking-wider mt-3">
+         Comprehensive Program
+        </div>
+       </div>
+       <div class="p-6">
+        <h3 class="font-display text-xl font-bold text-gray-900 mb-2">4 Skills</h3>
+        <p class="text-sm text-gray-500 leading-relaxed mb-4">Develop all aspects of English proficiency. Speaking, listening, reading, and writing integrated into engaging, balanced lessons.</p>
+        <ul class="text-xs text-gray-400 space-y-2 mb-5">
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Speaking &amp; listening</li>
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Reading &amp; writing</li>
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Balanced skill development</li>
+        </ul><a href="#contact" class="block text-center py-2.5 border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition">Enroll</a>
+       </div>
+      </div><!-- TOT Program -->
+      <div class="course-card bg-white border border-gray-100 rounded-2xl overflow-hidden">
+       <div class="bg-sage-50 p-8 text-center icon-bounce">
+        <div class="w-14 h-14 mx-auto bg-sage-100 rounded-xl flex items-center justify-center">
+         <i data-lucide="graduation-cap" class="w-7 h-7 text-sage-500"></i>
+        </div>
+        <div class="text-xs text-sage-500 font-medium uppercase tracking-wider mt-3">
+         Advanced Program
+        </div>
+       </div>
+       <div class="p-6">
+        <h3 class="font-display text-xl font-bold text-gray-900 mb-2">TOT Program</h3>
+        <p class="text-sm text-gray-500 leading-relaxed mb-4">Teacher training and professional development. Become a certified English instructor with our comprehensive TOT (Training of Trainers) program.</p>
+        <ul class="text-xs text-gray-400 space-y-2 mb-5">
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Teaching methodology</li>
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Classroom management</li>
+         <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-400"></i>Certification program</li>
+        </ul><a href="#contact" class="block text-center py-2.5 border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition">Enroll</a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Reviews -->
+   <section id="reviews" class="py-16 sm:py-20 md:py-28 px-4 sm:px-6 section-reveal" style="animation-delay: 0.4s;">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-12 sm:mb-16">
+      <div class="text-sage-400 text-xs sm:text-sm font-medium uppercase tracking-widest mb-3">
+       Testimonials
+      </div>
+      <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">What Parents &amp; Students Say</h2>
+     </div>
+     <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
+      <div class="review-card bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col card-glow">
+       <div class="flex gap-1 mb-6 text-amber-400">
+        <i data-lucide="star" class="w-4 sm:w-5 h-4 sm:h-5 fill-current"></i> <i data-lucide="star" class="w-4 sm:w-5 h-4 sm:h-5 fill-current"></i> <i data-lucide="star" class="w-4 sm:w-5 h-4 sm:h-5 fill-current"></i> <i data-lucide="star" class="w-4 sm:w-5 h-4 sm:h-5 fill-current"></i> <i data-lucide="star" class="w-4 sm:w-5 h-4 sm:h-5 fill-current text-gray-300"></i>
+       </div>
+       <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 sm:mb-8 flex-grow italic">"The classes are well-structured and the instructors are very patient. My son went from beginner to holding basic conversations in just a few months."</p>
+       <div class="border-t border-gray-100 pt-4 sm:pt-6 flex items-center gap-4">
+        <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-sage-300 to-sage-400 rounded-full flex items-center justify-center font-display font-bold text-white text-sm sm:text-lg flex-shrink-0">
+         N
+        </div>
+        <div>
+         <div class="text-xs sm:text-sm font-semibold text-gray-900">
+          Nwe Nwe Aye
+         </div>
+         <div class="text-xs text-sage-500 font-medium">
+          Parent
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="review-card bg-white rounded-3xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col card-glow">
+       <div class="flex gap-1 mb-6 text-amber-400">
+        <i data-lucide="star" class="w-5 h-5 fill-current"></i> <i data-lucide="star" class="w-5 h-5 fill-current"></i> <i data-lucide="star" class="w-5 h-5 fill-current"></i> <i data-lucide="star" class="w-5 h-5 fill-current"></i> <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+       </div>
+       <p class="text-gray-600 leading-relaxed mb-8 flex-grow italic">"I love the flexible schedule. The teachers are professional and really care about their students. I've made great progress with my English!"</p>
+       <div class="border-t border-gray-100 pt-6 flex items-center gap-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-sage-300 to-sage-400 rounded-full flex items-center justify-center font-display font-bold text-white text-lg">
+         S
+        </div>
+        <div>
+         <div class="text-sm font-semibold text-gray-900">
+          Stella
+         </div>
+         <div class="text-xs text-sage-500 font-medium">
+          Student
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="review-card bg-white rounded-3xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col card-glow">
+       <div class="flex gap-1 mb-6 text-amber-400">
+        <i data-lucide="star" class="w-5 h-5 fill-current"></i> <i data-lucide="star" class="w-5 h-5 fill-current"></i> <i data-lucide="star" class="w-5 h-5 fill-current"></i> <i data-lucide="star" class="w-5 h-5 fill-current"></i> <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+       </div>
+       <p class="text-gray-600 leading-relaxed mb-8 flex-grow italic">"Professional, dedicated instructors who really take time to understand your learning style. The small class sizes make all the difference!"</p>
+       <div class="border-t border-gray-100 pt-6 flex items-center gap-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-sage-300 to-sage-400 rounded-full flex items-center justify-center font-display font-bold text-white text-lg">
+         M
+        </div>
+        <div>
+         <div class="text-sm font-semibold text-gray-900">
+          Myint Myint Swe
+         </div>
+         <div class="text-xs text-sage-500 font-medium">
+          Parent
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact -->
+   <section id="contact" class="py-16 sm:py-20 md:py-28 px-4 sm:px-6 section-reveal" style="animation-delay: 0.5s;">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center max-w-2xl mx-auto">
+      <div class="text-sage-400 text-xs sm:text-sm font-medium uppercase tracking-widest mb-3">
+       Get In Touch
+      </div>
+      <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-10">Ready to Start Learning?</h2>
+      <div class="grid sm:grid-cols-3 gap-6 sm:gap-8">
+       <div class="flex flex-col items-center text-center">
+        <div class="w-12 h-12 bg-sage-100 rounded-full flex items-center justify-center mb-4">
+         <i data-lucide="mail" class="w-5 sm:w-6 h-5 sm:h-6 text-sage-500"></i>
+        </div>
+        <div class="text-xs text-gray-400 uppercase tracking-wider font-medium mb-2">
+         Email
+        </div>
+        <div id="display-email" class="text-xs sm:text-sm font-medium text-gray-900">
+         englishworld@gmail.com
+        </div>
+       </div>
+       <div class="flex flex-col items-center text-center">
+        <div class="w-12 h-12 bg-sage-100 rounded-full flex items-center justify-center mb-4">
+         <i data-lucide="phone" class="w-5 sm:w-6 h-5 sm:h-6 text-sage-500"></i>
+        </div>
+        <div class="text-xs text-gray-400 uppercase tracking-wider font-medium mb-2">
+         Phone
+        </div>
+        <div id="display-phone" class="text-xs sm:text-sm font-medium text-gray-900">
+         (555) 234-5678
+        </div>
+       </div>
+       <div class="flex flex-col items-center text-center">
+        <div class="w-12 h-12 bg-sage-100 rounded-full flex items-center justify-center mb-4">
+         <i data-lucide="clock" class="w-5 sm:w-6 h-5 sm:h-6 text-sage-500"></i>
+        </div>
+        <div class="text-xs text-gray-400 uppercase tracking-wider font-medium mb-2">
+         Hours
+        </div>
+        <div class="text-xs sm:text-sm font-medium text-gray-900">
+         Mon–Sat, 9:00 AM – 8:00 PM
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Social & Footer -->
+   <footer class="bg-gray-900 text-white py-10 sm:py-14 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+     <div class="grid sm:grid-cols-3 gap-8 sm:gap-10 mb-10">
+      <div>
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-9 h-9 rounded-lg bg-sage-400 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="book-open" class="w-5 h-5 text-white"></i>
+        </div><span id="footer-school-name" class="font-display font-bold text-base sm:text-lg">English World</span>
+       </div>
+       <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Providing quality online English education to our local community and beyond.</p>
+      </div>
+      <div>
+       <div class="font-medium text-xs sm:text-sm mb-4">
+        Follow Us
+       </div>
+       <div class="flex gap-2"><a href="#" class="w-9 sm:w-10 h-9 sm:h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-sage-400 active:bg-sage-500 transition flex-shrink-0" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a> <a href="#" class="w-9 sm:w-10 h-9 sm:h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-sage-400 active:bg-sage-500 transition flex-shrink-0" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a> <a href="#" class="w-9 sm:w-10 h-9 sm:h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-sage-400 active:bg-sage-500 transition flex-shrink-0" aria-label="Twitter"><i data-lucide="twitter" class="w-4 h-4"></i></a> <a href="#" class="w-9 sm:w-10 h-9 sm:h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-sage-400 active:bg-sage-500 transition flex-shrink-0" aria-label="YouTube"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+       </div>
+      </div>
+     </div>
+     <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+      © 2025 English World. All rights reserved.
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+  // Initialize lucide icons immediately
+  lucide.createIcons();
+
+  // Default config
+  const defaultConfig = {
+    school_name: 'English World',
+    hero_tagline: 'Learn English, Your Way, Your Time',
+    hero_subtitle: 'Quality online English classes for all ages and levels. Small groups, personalized instruction, and flexible scheduling.',
+    about_heading: 'Local, Professional English Education Online',
+    about_text: 'English World is a community-focused language school offering online classes taught by experienced, certified instructors. We provide structured, engaging lessons designed for all proficiency levels—from absolute beginners to advanced learners. Every student receives individualized attention in a supportive learning environment.',
+    contact_email: 'englishworld@gmail.com',
+    contact_phone: '09445720059',
+    background_color: '#ffffff',
+    surface_color: '#f9fafb',
+    text_color: '#111827',
+    primary_action_color: '#111827',
+    secondary_action_color: '#8ebb8e',
+    font_family: 'DM Sans',
+    font_size: 16
+  };
+
+  // Mobile menu
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  mobileToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // Element SDK
+  function applyConfig(config) {
+    const c = { ...defaultConfig, ...config };
+
+    // Text updates
+    document.getElementById('nav-school-name').textContent = c.school_name;
+    document.getElementById('footer-school-name').textContent = c.school_name;
+
+    const heroTag = document.getElementById('hero-tagline');
+    const parts = c.hero_tagline.split(',');
+    if (parts.length > 1) {
+      heroTag.innerHTML = parts[0] + ',<br><span class="text-sage-400">' + parts.slice(1).join(',') + '</span>';
+    } else {
+      heroTag.textContent = c.hero_tagline;
+    }
+
+    document.getElementById('hero-subtitle').textContent = c.hero_subtitle;
+    document.getElementById('about-heading').textContent = c.about_heading;
+    document.getElementById('about-text').textContent = c.about_text;
+    document.getElementById('display-email').textContent = c.contact_email;
+    document.getElementById('display-phone').textContent = c.contact_phone;
+
+    // Font
+    const font = c.font_family || defaultConfig.font_family;
+    const stack = font + ', Arial, sans-serif';
+    document.body.style.fontFamily = stack;
+
+    // Font size
+    const base = c.font_size || defaultConfig.font_size;
+    document.body.style.fontSize = base + 'px';
+
+    // Colors
+    document.getElementById('app-wrapper').style.backgroundColor = c.background_color;
+    document.querySelectorAll('.bg-gray-50').forEach(el => el.style.backgroundColor = c.surface_color);
+    document.body.style.color = c.text_color;
+
+    // Primary action buttons
+    document.querySelectorAll('a.bg-gray-900, button[type="submit"]').forEach(el => {
+      el.style.backgroundColor = c.primary_action_color;
+    });
+
+    // Re-render icons after DOM changes
+    setTimeout(() => lucide.createIcons(), 0);
+  }
+
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => applyConfig(config),
+    mapToCapabilities: (config) => ({
+      recolorables: [
+        { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+        { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+        { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+        { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+        { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } },
+      ],
+      borderables: [],
+      fontEditable: {
+        get: () => config.font_family || defaultConfig.font_family,
+        set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+      },
+      fontSizeable: {
+        get: () => config.font_size || defaultConfig.font_size,
+        set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+      }
+    }),
+    mapToEditPanelValues: (config) => new Map([
+      ['school_name', config.school_name || defaultConfig.school_name],
+      ['hero_tagline', config.hero_tagline || defaultConfig.hero_tagline],
+      ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+      ['about_heading', config.about_heading || defaultConfig.about_heading],
+      ['about_text', config.about_text || defaultConfig.about_text],
+      ['contact_email', config.contact_email || defaultConfig.contact_email],
+      ['contact_phone', config.contact_phone || defaultConfig.contact_phone],
+    ])
+  });
+
+  // Render icons after page fully loads
+  document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+  });
+
+  window.addEventListener('load', () => {
+    lucide.createIcons();
+  });
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ef3e32f7240a1c0',t:'MTc3NjY4NTM2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
